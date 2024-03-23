@@ -1,16 +1,10 @@
 class Song < ApplicationRecord
+  self.implicit_order_column = 'title'
+
   belongs_to :artist
+  has_many :downloads, dependent: :destroy
 
-  before_validation :format_title, on: :create
-  before_save :validacion_description
+  validates :length, numericality: { greater_than: 5 }
+  validates :filesize, numericality: { greater_than: 0 }
 
-  private
-
-  def validacion_description
-    self.description = description.split('').shuffle if description.include?('</script>')
-  end
-
-  def format_title
-    self.title = title.capitalize
-  end
 end

@@ -10,22 +10,31 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_03_22_130200) do
+ActiveRecord::Schema[7.1].define(version: 2024_03_23_084236) do
   create_table "artists", force: :cascade do |t|
-    t.string "email", default: "", null: false
-    t.string "first_name", default: "", null: false
-    t.string "last_name", default: "", null: false
-    t.string "nickname", default: "", null: false
+    t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_artists_on_name"
+  end
+
+  create_table "downloads", force: :cascade do |t|
+    t.integer "song_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["song_id"], name: "index_downloads_on_song_id"
   end
 
   create_table "songs", force: :cascade do |t|
     t.string "title", default: "Untitled", null: false
-    t.text "description", default: "", null: false
-    t.bigint "artist_id", null: false
+    t.integer "artist_id", null: false
+    t.integer "length", null: false
+    t.integer "filesize", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["artist_id"], name: "index_songs_on_artist_id"
   end
 
+  add_foreign_key "downloads", "songs"
+  add_foreign_key "songs", "artists"
 end
