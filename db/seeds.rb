@@ -29,7 +29,7 @@ Artist.all.each do |artist|
     50.times do |t|
       Download.create!(
         song: song,
-        created_at: rand(Time.at(2.months.ago)..Time.at(Time.now))
+        created_date: rand(Time.at(2.months.ago)..Time.at(Time.now))
       )
     end
   end

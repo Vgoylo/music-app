@@ -10,19 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_03_23_084236) do
+ActiveRecord::Schema[7.1].define(version: 2024_03_25_135316) do
   create_table "artists", force: :cascade do |t|
     t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["name"], name: "index_artists_on_name"
-    
   end
 
   create_table "downloads", force: :cascade do |t|
     t.integer "song_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.date "created_date", null: false
+    t.index ["created_date"], name: "index_downloads_on_created_date"
     t.index ["song_id"], name: "index_downloads_on_song_id"
   end
 
