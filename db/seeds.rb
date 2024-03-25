@@ -33,6 +33,7 @@ Artist.all.each do |artist|
       )
     end
   end
-  puts 'Songs have been created'
-  puts 'Download have been created'
 end
+
+puts 'Songs have been created'
+puts 'Download have been created'
